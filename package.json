@@ -1,0 +1,32 @@
+{
+	"name": "telegram-bot-template",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GrammY bot starter template",
+  "imports": {
+    "#root/*": "./build/src/*"
+  },
+  "author": "deptyped <deptyped@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+	"scripts": {
+		"dev": "tsc-watch --onSuccess \"tsx ./src/start.ts\"",
+		"build": "tsc"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^1.2.1",
+		"eslint": "^8.54.0",
+		"tsc-watch": "^6.0.4",
+		"typescript": "^5.2.2",
+		"husky": "8.0.3",
+    "lint-staged": "14.0.1"
+	},
+	"dependencies": {
+		"grammy": "^1.19.2",
+		"tsx": "3.14.0"
+	}
+}
