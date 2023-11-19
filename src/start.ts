@@ -1,18 +1,80 @@
-import { Bot } from "grammy";
+import { Bot, GrammyError, HttpError } from 'grammy'
+import { responseTime } from './middlewares/timestamp.js'
+import { commandList } from './constants/index.js'
 
 // Create an instance of the `Bot` class and pass your bot token to it.
-const bot = new Bot("6641109678:AAFVNYpQb_0-6dhGtT6_9ZObGYDfDBTO3Xk") // <-- put your bot token between the ""
+const bot = new Bot('6962244178:AAGy1H78uOymtwmB5T39qnGroAAdHIO0Gmw') // <-- put your bot token between the ""
+const userChatID = 5766880721
 
-// You can now register listeners on your bot object `bot`.
-// grammY will call the listeners when users send messages to your bot.
+/**
+ * High-priority middleware
+ */
+await bot.api.setMyCommands(commandList)
 
-// Handle the /start command.
-bot.command("start", (ctx) => ctx.reply("Welcome! Up and running."));
-// Handle other messages.
-bot.on("message", (ctx) => ctx.reply("Got another message!"));
+bot.use(responseTime)
 
-// Now that you specified how to handle messages, you can start your bot.
-// This will connect to the Telegram servers and wait for messages.
+/**
+ * Message handlers
+ */
+bot.command('start', ctx => ctx.reply('Welcome! Up and running.'))
+
+bot.command('help', async (ctx) => {
+  ctx.reply('You wanna some help?')
+})
+
+bot.on('message::email', async (ctx) => {
+  ctx.reply(`Send email to ${ctx.message.text}?`)
+})
+
+bot.hears('I love pizza!', async (ctx) => {
+  // `reply` is an alias for `sendMessage` in the same chat (see next section).
+  await ctx.reply('Pizza loves you!', {
+    // `reply_to_message_id` specifies the actual reply feature.
+    reply_to_message_id: ctx.msg.message_id,
+  })
+})
+
+bot.command('welcome', async () => {
+  await bot.api.sendMessage(
+    userChatID,
+    '*Hi\\!* _Welcome_ to [grammY](https://grammy.dev)\\.',
+    { parse_mode: 'MarkdownV2' },
+  )
+})
+
+bot.command('wallpaper', async (ctx) => {
+  await ctx.replyWithPhoto('https://source.unsplash.com/random/?tokyo,night')
+})
+
+bot.command('about', async (ctx) => {
+  const me = await bot.api.getMe()
+  console.log('me :>> ', me)
+  ctx.reply(`<b>Hi!</b> <i>Welcome</i> to <a href="https://t.me/${me.username}">${me.first_name}</a><span class="tg-spoiler"> id:${me.id}</span>`, { parse_mode: 'HTML' })
+})
+
+bot.on('message', async (ctx) => {
+  ctx.reply('Got another message!')
+})
+
+/**
+ * Error handling
+ */
+bot.catch((err) => {
+  const ctx = err.ctx
+  console.error(`Error while handling update ${ctx.update.update_id}:`)
+  const e = err.error
+  if (e instanceof GrammyError)
+    console.error('Error in request:', e.description)
+
+  else if (e instanceof HttpError)
+    console.error('Could not contact Telegram:', e)
+
+  else
+    console.error('Unknown error:', e)
+})
+/**
+ * Custom middlewares
+ */
 
 // Start the bot.
-bot.start();
+bot.start()
