@@ -1,6 +1,7 @@
 import { Bot, GrammyError, HttpError } from 'grammy';
 import { responseTime } from './middlewares/timestamp.js';
 import { commandList } from './constants/index.js';
+import unsplash from './modules/unsplash.js';
 // Create an instance of the `Bot` class and pass your bot token to it.
 const bot = new Bot('6962244178:AAGy1H78uOymtwmB5T39qnGroAAdHIO0Gmw'); // <-- put your bot token between the ""
 const userChatID = 5766880721;
@@ -30,13 +31,28 @@ bot.command('welcome', async () => {
     await bot.api.sendMessage(userChatID, '*Hi\\!* _Welcome_ to [grammY](https://grammy.dev)\\.', { parse_mode: 'MarkdownV2' });
 });
 bot.command('wallpaper', async (ctx) => {
-    await ctx.replyWithPhoto('https://source.unsplash.com/random/?tokyo,night');
+    await unsplash.photos.getRandom({ query: 'tokyo,night', orientation: 'landscape' }).then((result) => {
+        if (result.errors) {
+            // handle error here
+            console.log('error occurred: ', result.errors[0]);
+            bot.api.sendMessage(userChatID, `error occurred: ${result.errors[0]}`);
+        }
+        else {
+            console.log('result :>> ', result.response);
+            ctx.replyWithPhoto(result.response.urls.regular);
+            // TODO: extend the result.response object with current unsplash api
+            // https://unsplash.com/documentation#get-a-random-photo
+        }
+    });
 });
 bot.command('about', async (ctx) => {
     const me = await bot.api.getMe();
     console.log('me :>> ', me);
     ctx.reply(`<b>Hi!</b> <i>Welcome</i> to <a href="https://t.me/${me.username}">${me.first_name}</a><span class="tg-spoiler"> id:${me.id}</span>`, { parse_mode: 'HTML' });
 });
+bot.on('message:entities:url', async (ctx) => {
+    ctx.reply('Got a URL!');
+}); // messages containing a URL
 bot.on('message', async (ctx) => {
     ctx.reply('Got another message!');
 });

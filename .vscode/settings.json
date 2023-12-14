@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Vitesse qb dark",
   "typescript.tsdk": "node_modules/typescript/lib",
   // Disable the default formatter, use eslint instead
   "eslint.experimental.useFlatConfig": true,
