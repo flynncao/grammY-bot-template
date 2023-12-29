@@ -1,12 +1,15 @@
 import { Bot, GrammyError, HttpError } from 'grammy'
 import axios, { AxiosResponse } from 'axios'
+import 'dotenv/config'
 import { responseTime } from './middlewares/timestamp.js'
 import { commandList } from './constants/index.js'
 import unsplash from './modules/unsplash.js'
+import Logger from './utils/logger.js'
 
 // Create an instance of the `Bot` class and pass your bot token to it.
-const bot = new Bot('6962244178:AAGy1H78uOymtwmB5T39qnGroAAdHIO0Gmw') // <-- put your bot token between the ""
-const userChatID = 5766880721
+const botToken = process.env.BOT_TOKEN!
+const userChatID = process.env.USER_CHAT_ID!
+const bot = new Bot(botToken)
 
 /**
  * High-priority middleware
@@ -15,10 +18,14 @@ await bot.api.setMyCommands(commandList)
 
 bot.use(responseTime)
 
+Logger.logSuccess('Bot started')
+
 /**
  * Message handlers
  */
-bot.command('start', ctx => ctx.reply('Welcome! Up and running.'))
+bot.command('start', ctx => () => {
+  ctx.reply('Welcome! Up and running.')
+})
 
 bot.command('help', async (ctx) => {
   ctx.reply('You wanna some help?')
