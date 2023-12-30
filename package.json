@@ -4,18 +4,22 @@
   "version": "0.1.0",
   "private": true,
   "description": "GrammY bot starter template",
+  "author": "Flynn Cao",
+  "license": "MIT",
+  "main": "./dist/start.js",
   "imports": {
     "#root/*": "./build/src/*"
   },
-  "author": "deptyped <deptyped@gmail.com>",
-  "license": "MIT",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "dev": "tsc-watch --onSuccess \"tsx ./src/start.ts\"",
-    "build": "tsc"
+    "start": "node dist/start.js",
+    "dev": "tsup --watch --onSuccess \"node dist/start.js\"",
+    "dev:tsc": "tsc-watch --onSuccess \"tsx ./build/start.ts\"",
+    "build": "tsup",
+    "build:tsc": "tsc"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -29,10 +33,13 @@
   "devDependencies": {
     "@antfu/eslint-config": "^1.2.1",
     "@types/node": "^20.10.5",
+    "concurrently": "^8.2.2",
     "eslint": "^8.54.0",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
+    "nodemon": "^3.0.2",
     "tsc-watch": "^6.0.4",
+    "tsup": "^8.0.1",
     "typescript": "^5.2.2"
   }
 }

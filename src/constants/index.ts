@@ -6,4 +6,5 @@ export const commandList: Command[] = [
   { command: 'settings', description: 'Open settings' },
   { command: 'about', description: 'Show information about the bot' },
   { command: 'wallpaper', description: 'Show random wallpaper' },
+  { command: 'email', description: 'Send email to someone' },
 ]

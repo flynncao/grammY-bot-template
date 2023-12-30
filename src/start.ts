@@ -6,7 +6,10 @@ import { commandList } from './constants/index.js'
 import unsplash from './modules/unsplash.js'
 import Logger from './utils/logger.js'
 
+console.log('Bot is running...')
+
 // Create an instance of the `Bot` class and pass your bot token to it.
+
 const botToken = process.env.BOT_TOKEN!
 const userChatID = process.env.USER_CHAT_ID!
 const bot = new Bot(botToken)
@@ -14,21 +17,27 @@ const bot = new Bot(botToken)
 /**
  * High-priority middleware
  */
+
 await bot.api.setMyCommands(commandList)
 
 bot.use(responseTime)
 
 Logger.logSuccess('Bot started')
 
+bot.api.sendMessage(userChatID, 'Bot started')
 /**
  * Message handlers
  */
-bot.command('start', ctx => () => {
+bot.command('start', async (ctx) => {
   ctx.reply('Welcome! Up and running.')
 })
 
 bot.command('help', async (ctx) => {
   ctx.reply('You wanna some help?')
+})
+
+bot.command('email', async (ctx) => {
+  ctx.reply('Send email to someone')
 })
 
 bot.on('message::email', async (ctx) => {
