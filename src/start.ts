@@ -63,15 +63,15 @@ bot.command('welcome', async () => {
 bot.command('wallpaper', async (ctx) => {
   await unsplash.photos.getRandom({ query: 'tokyo,night', orientation: 'landscape' }).then((result: any) => {
     if (result.errors) {
-      // handle error here
+    // handle error here
       console.log('error occurred: ', result.errors[0])
       bot.api.sendMessage(userChatID, `error occurred: ${result.errors[0]}`)
     }
     else {
       console.log('result :>> ', result.response)
       ctx.replyWithPhoto(result.response.urls.regular)
-      // TODO: extend the result.response object with current unsplash api
-      // https://unsplash.com/documentation#get-a-random-photo
+    // TODO: extend the result.response object with current unsplash api
+    // https://unsplash.com/documentation#get-a-random-photo
     }
   })
 })
