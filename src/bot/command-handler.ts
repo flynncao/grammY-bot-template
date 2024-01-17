@@ -7,10 +7,26 @@ export default function registerCommandHandler() {
   if (env === null || bot === null || menus === null)
     return
 
+  bot.command('hello', async (ctx) => {
+    await ctx.reply(':', {
+      reply_markup: menus['greet-new'],
+    })
+  })
+
+  bot.command('id', async (ctx) => {
+    return await ctx.reply('Your id is:', {
+      reply_markup: menus.id,
+    })
+  })
+
+  bot.command('count', async (ctx) => {
+    return await ctx.reply('Your ranged menu be like:', {
+      reply_markup: menus['ranged-menu'],
+    })
+  })
   bot.command('start', async (ctx) => {
-    console.log(menus['edit-post'])
     await ctx.reply('Welcome, check out this menu', {
-      reply_markup: menus['edit-post'],
+      reply_markup: menus['simple-menu'],
     })
   })
   bot.command('welcome', async () => {
@@ -39,7 +55,6 @@ export default function registerCommandHandler() {
 
   bot.command('about', async (ctx) => {
     const me = await bot.api.getMe()
-    console.log('me :>> ', me)
     ctx.reply(`<b>Hi!</b> <i>Welcome</i> to <a href="https://t.me/${me.username}">${me.first_name}</a><span class="tg-spoiler"> id:${me.id}</span>`, { parse_mode: 'HTML' })
   })
 

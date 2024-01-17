@@ -42,8 +42,8 @@ const postSchema = new Schema<IPost>({
 
 const User = model<IPost>('Post', postSchema)
 
+// TODO: Use menu to operate database
 export function findOrCreateUser(id: number) {
-  console.log('User :>> ', User.base)
   return User.findOneAndUpdate(
     // filter
     { id },
@@ -56,7 +56,9 @@ export function findOrCreateUser(id: number) {
     },
   )
 }
-export function editPost(id: number, content: string, updated_at: Date) {
+export function editPost(id: number, content: string, updated_at?: Date) {
+  if (!updated_at)
+    updated_at = new Date()
   return User.findOneAndUpdate(
     { id },
     { content, updated_at },

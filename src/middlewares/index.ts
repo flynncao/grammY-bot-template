@@ -1,3 +1,4 @@
+import { conversations } from '@grammyjs/conversations'
 import timestamp from './timestamp.js'
 import store from '#root/databases/store.js'
 import Logger from '#root/utils/logger.js'
@@ -8,10 +9,11 @@ export default function registerMiddlewares() {
     return
   const middlewares = [
     timestamp,
+    conversations(),
   ]
   for (const item of middlewares) {
     if (item)
       bot.use(item)
   }
-  Logger.logSuccess('Middlewares registered')
+  Logger.logSuccess('Critial middwares registered')
 }
