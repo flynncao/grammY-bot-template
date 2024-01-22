@@ -3,15 +3,12 @@ import type {
   Conversation,
   ConversationFlavor,
 } from '@grammyjs/conversations'
-import type { Post } from './blog.js'
 
-export interface mySession {
-  total?: number
-  dbpost?: Post
-  postID?: number
-  myStateIdentifier?: string
+export interface SessionData {
+  message?: string
+  count?: number
 }
 
-export type MyContext = Context & SessionFlavor<mySession> & ConversationFlavor
+export type MyContext = Context & SessionFlavor<SessionData> & ConversationFlavor
 
 export type MyConversation = Conversation<MyContext>
