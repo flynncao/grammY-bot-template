@@ -14,18 +14,23 @@ export default function registerCommandHandler() {
   })
 
   bot.command('id', async (ctx) => {
-    return await ctx.reply('Your id is:', {
+    await ctx.reply('Your id is:', {
       reply_markup: menus.id,
     })
   })
 
   bot.command('count', async (ctx) => {
-    return await ctx.reply('Your ranged menu be like:', {
+    await ctx.reply('Your ranged menu be like:', {
       reply_markup: menus['ranged-menu'],
     })
   })
+
   bot.command('start', async (ctx) => {
-    await ctx.reply('Welcome, check out this menu', {
+    await ctx.reply('Hello~')
+  })
+
+  bot.command('menu', async (ctx) => {
+    await ctx.reply('What is your gender?', {
       reply_markup: menus['simple-menu'],
     })
   })

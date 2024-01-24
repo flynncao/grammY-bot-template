@@ -12,7 +12,7 @@ export default function initLocalEnv(): boolean {
     return true
   }
   catch (error) {
-    Logger.logError(`FATAL: Error while initializing local environment', ${error}`)
+    Logger.logError(`FATAL: Error while initializing local environment, please check .env file under root directory.', ${error}`)
     return false
   }
 }

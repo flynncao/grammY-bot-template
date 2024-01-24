@@ -24,7 +24,7 @@ Add [Bot Father](https://telegram.me/BotFather) to your contact, use `/newbot` c
 * `/start` Welcome text
 * `/help` Show help text
 * `/settings` Open settings
-* `/wallpaper` Get a new wallpaper from Unsplash
+* `/wallpaper` Get a random wallpaper from Unsplash(need to fill in access token in .env file under root directory)
 
 > To enable the `/wallpaper` command, you need to apply a [unsplah api key](https://unsplash.com/documentation) and insert it into `.env`
 

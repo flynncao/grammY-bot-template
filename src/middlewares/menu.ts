@@ -109,7 +109,7 @@ const menuList: AtomicMenu[] = [
     buttons: [
       { text: 'Female', callback: (ctx: MyContext) => ctx.reply('You pressed female!') },
       { text: 'Male', callback: (ctx: MyContext) => ctx.reply('You pressed male!') },
-      { text: 'Uncertain', callback: (ctx: MyContext) => ctx.reply('You pressed ?!') },
+      { text: 'Helicopter', callback: (ctx: MyContext) => ctx.reply('You pressed ?!') },
     ],
     menuOptions: {
       onMenuOutdated: '2nd menu',
