@@ -30,9 +30,14 @@ async function editPostConversation(conversation: MyConversation, ctx: MyContext
 async function createPostConversation(conversation: MyConversation, ctx: MyContext) {
   await ctx.reply('Enter the post id: ')
   const id = await conversation.form.number()
+  await ctx.reply('Enter the post title: ')
+  const title = await conversation.form.text()
+  await ctx.reply('Enter the post content: ')
+  const content = await conversation.form.text()
+  const brief = { title, content }
   if (id) {
     conversation.external(() => {
-      const res = findOrCreateUser(id)
+      const res = findOrCreateUser(id, brief)
       ctx.reply(`Post created successfully: ${res}`)
     })
   }

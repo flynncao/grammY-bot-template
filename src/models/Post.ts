@@ -43,12 +43,19 @@ const postSchema = new Schema<IPost>({
 const User = model<IPost>('Post', postSchema)
 
 // TODO: Use menu to operate database
-export function findOrCreateUser(id: number) {
+interface Brief {
+  title: string
+  content: string
+}
+export function findOrCreateUser(id: number, brief?: Brief) {
   return User.findOneAndUpdate(
     // filter
     { id },
     // update
-    {},
+    {
+      title: brief?.title,
+      content: brief?.content,
+    },
     // config
     {
       upsert: true,

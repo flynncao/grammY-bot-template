@@ -152,12 +152,12 @@ export function createAllMenus() {
       onMenuOutdated: 'Reloaded',
     },
   }
-  const wowMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
+  const globalMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
   for (const item of menuList) {
     builder.reset(item.identifier, obj.menuOptions)
     builder.insertButtons(item.buttons)
     builder.registerInBot()
-    wowMenuList[item.identifier] = builder.getMenu()
+    globalMenuList[item.identifier] = builder.getMenu()
   }
   // legacy creation code
   const dynamicLabelledMenu = new Menu<MyContext>('greet-new')
@@ -168,6 +168,8 @@ export function createAllMenus() {
   const rangedMenu = new Menu<MyContext>('ranged-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).url('Google', 'https://google.com').dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
     const length = await getRandomIntFromInternet()
 
+    console.log('length :>> ', length)
+
     for (let i = 0; i < length; i++) {
       range.text(i.toString(), (ctx) => {
         store.dashboardFingerprint = new Date().toISOString()
@@ -175,11 +177,10 @@ export function createAllMenus() {
       }).row()
     }
   }).text('Cancel', ctx => ctx.deleteMessage())
-
   store.bot?.use(dynamicLabelledMenu).use(rangedMenu)
-  wowMenuList['greet-new'] = dynamicLabelledMenu
-  wowMenuList['ranged-menu'] = rangedMenu
-  store.menus = wowMenuList
+  globalMenuList['greet-new'] = dynamicLabelledMenu
+  globalMenuList['ranged-menu'] = rangedMenu
+  store.menus = globalMenuList
   Logger.logSuccess('All menus initialized')
 }
 
