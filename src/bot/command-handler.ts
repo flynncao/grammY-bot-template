@@ -19,6 +19,9 @@ export default function registerCommandHandler() {
     })
   })
 
+  bot.command('refresh', (ctx) => {
+    store.dashboardFingerprint = new Date().toISOString()
+  })
   bot.command('count', async (ctx) => {
     return await ctx.reply('Your ranged menu be like:', {
       reply_markup: menus['ranged-menu'],
@@ -26,7 +29,7 @@ export default function registerCommandHandler() {
   })
   bot.command('start', async (ctx) => {
     await ctx.reply('Welcome, check out this menu', {
-      reply_markup: menus['simple-menu'],
+      reply_markup: menus['ranged-menu'],
     })
   })
   bot.command('welcome', async () => {
@@ -63,6 +66,16 @@ export default function registerCommandHandler() {
       session.count++
       await ctx.reply(`Count: ${session.count}`)
     }
+  })
+
+  bot.command('newpost', async (ctx) => {
+    await ctx.conversation.enter('createPostConversation')
+  })
+
+  bot.command('all', async (ctx) => {
+    await ctx.reply('All posts:', {
+      reply_markup: menus['posts-menu'],
+    })
   })
 
   Logger.logSuccess('Command handler registered')

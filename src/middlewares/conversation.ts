@@ -2,7 +2,7 @@ import { createConversation } from '@grammyjs/conversations'
 import type { MyContext, MyConversation } from '#root/types/bot.js'
 import store from '#root/databases/store.js'
 import Logger from '#root/utils/logger.js'
-import { editPost, findOrCreateUser } from '#root/models/Post.js'
+import { createNewPost, editPost, findOrCreateUser } from '#root/models/Post.js'
 
 async function greeting(conversation: MyConversation, ctx: MyContext) {
   await ctx.reply('Hello, what do you want to do?')
@@ -30,10 +30,15 @@ async function editPostConversation(conversation: MyConversation, ctx: MyContext
 async function createPostConversation(conversation: MyConversation, ctx: MyContext) {
   await ctx.reply('Enter the post id: ')
   const id = await conversation.form.number()
+  await ctx.reply('Enter the post title: ')
+  const title = await conversation.form.text()
+  await ctx.reply('Enter the post content: ')
+  const content = await conversation.form.text()
+  const brief = { title, content }
   if (id) {
-    conversation.external(() => {
-      const res = findOrCreateUser(id)
-      ctx.reply(`Post created successfully: ${res}`)
+    conversation.external(async () => {
+      const res = await createNewPost(id, title, content)
+      ctx.reply(`New Post: ${res}`)
     })
   }
 }

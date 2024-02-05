@@ -65,12 +65,35 @@ export class Post {
 const PostModel = getModelForClass(Post)
 
 // TODO: Use menu to operate database
-export function findOrCreateUser(id: number) {
+interface Brief {
+  title: string
+  content: string
+}
+
+export function createNewPost(id: number, title: string, content: string, author: string = 'Flynn Cao', created_at?: Date) {
+  if (!created_at)
+    created_at = new Date()
+  return PostModel.create({
+    id,
+    title,
+    content,
+    author,
+    created_at,
+  })
+}
+
+export function getAllPosts() {
+  return PostModel.find({})
+}
+export function findOrCreateUser(id: number, brief?: Brief) {
   return PostModel.findOneAndUpdate(
     // filter
     { id },
     // update
-    {},
+    {
+      title: brief?.title,
+      content: brief?.content,
+    },
     // config
     {
       upsert: true,

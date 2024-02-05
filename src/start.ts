@@ -36,7 +36,7 @@ async function init() {
     const { env } = store
     if (env === null)
       return
-    await mongoose.connect('mongodb://localhost:27017/blog')
+    await mongoose.connect('mongodb://localhost:27017/template')
     const bot = new Bot<MyContext>(env.bot_token)
     store.bot = bot
     // Set commands

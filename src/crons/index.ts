@@ -8,10 +8,6 @@ export function initCrons() {
     const userChatId = store.env!.user_chat_id!
     const timeZone = 'Asia/Shanghai'
 
-    const job = new CronJob('*/5 * * * * *', () => {
-      console.log('running a task every 5 seconds')
-    }, null, false, timeZone)
-
     const monringJob = new CronJob('0 0 8 * * *', () => {
       console.log('running a task every 8:00')
       botInstance.api.sendMessage(userChatId, '早上好')
@@ -27,7 +23,7 @@ export function initCrons() {
       botInstance.api.sendMessage(userChatId, '晚上好')
     }, null, false, timeZone)
 
-    const jobs = [job, monringJob, noonJob, nightJob]
+    const jobs = [monringJob, noonJob, nightJob]
     jobs.forEach(job => job.start())
     Logger.logSuccess('Crons initialized')
   }
