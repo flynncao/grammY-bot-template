@@ -1,5 +1,4 @@
 import { Bot, GrammyError, HttpError, session } from 'grammy'
-import mongoose from 'mongoose'
 import { commandList } from './constants/index.js'
 import Logger from './utils/logger.js'
 import registerMessageHandler from './bot/message-handler.js'
@@ -9,6 +8,7 @@ import registerMiddlewares from './middlewares/index.js'
 import { createAllMenus } from './middlewares/menu.js'
 import { createAllConversations } from './middlewares/conversation.js'
 import { initCrons } from './crons/index.js'
+import { connectMongodb } from './utils/mongodb.js'
 import type { MyContext } from '#root/types/bot.js'
 import store from '#root/databases/store.js'
 
@@ -36,7 +36,7 @@ async function init() {
     const { env } = store
     if (env === null)
       return
-    await mongoose.connect('mongodb://localhost:27017/template')
+    await connectMongodb()
     const bot = new Bot<MyContext>(env.bot_token)
     store.bot = bot
     // Set commands

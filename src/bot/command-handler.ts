@@ -14,7 +14,7 @@ export default function registerCommandHandler() {
   })
 
   bot.command('id', async (ctx) => {
-    return await ctx.reply('Your id is:', {
+    await ctx.reply('Your id is:', {
       reply_markup: menus.id,
     })
   })
@@ -23,14 +23,12 @@ export default function registerCommandHandler() {
     store.dashboardFingerprint = new Date().toISOString()
   })
   bot.command('count', async (ctx) => {
-    return await ctx.reply('Your ranged menu be like:', {
+    await ctx.reply('Your ranged menu be like:', {
       reply_markup: menus['ranged-menu'],
     })
   })
   bot.command('start', async (ctx) => {
-    await ctx.reply('Welcome, check out this menu', {
-      reply_markup: menus['ranged-menu'],
-    })
+    await ctx.reply('Welcome, up and running')
   })
   bot.command('welcome', async () => {
     await bot.api.sendMessage(
