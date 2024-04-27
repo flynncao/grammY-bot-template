@@ -4,6 +4,7 @@ import { Menu } from '@grammyjs/menu'
 import type { MyContext } from '#root/types/bot.js'
 import store from '#root/databases/store.js'
 import Logger from '#root/utils/logger.js'
+import { getAllPosts } from '#root/models/Post.js'
 
 interface MenuButton {
   text: string
@@ -141,6 +142,7 @@ const menuList2 = [
 ]
 
 function sharedIdent(): string {
+  console.log('object :>> ', store.dashboardFingerprint)
   return store.dashboardFingerprint
 }
 
@@ -152,12 +154,12 @@ export function createAllMenus() {
       onMenuOutdated: 'Reloaded',
     },
   }
-  const wowMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
+  const globalMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
   for (const item of menuList) {
     builder.reset(item.identifier, obj.menuOptions)
     builder.insertButtons(item.buttons)
     builder.registerInBot()
-    wowMenuList[item.identifier] = builder.getMenu()
+    globalMenuList[item.identifier] = builder.getMenu()
   }
   // legacy creation code
   const dynamicLabelledMenu = new Menu<MyContext>('greet-new')
@@ -168,6 +170,8 @@ export function createAllMenus() {
   const rangedMenu = new Menu<MyContext>('ranged-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).url('Google', 'https://google.com').dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
     const length = await getRandomIntFromInternet()
 
+    console.log('length :>> ', length)
+
     for (let i = 0; i < length; i++) {
       range.text(i.toString(), (ctx) => {
         store.dashboardFingerprint = new Date().toISOString()
@@ -176,10 +180,22 @@ export function createAllMenus() {
     }
   }).text('Cancel', ctx => ctx.deleteMessage())
 
-  store.bot?.use(dynamicLabelledMenu).use(rangedMenu)
-  wowMenuList['greet-new'] = dynamicLabelledMenu
-  wowMenuList['ranged-menu'] = rangedMenu
-  store.menus = wowMenuList
+  const postsMenu = new Menu<MyContext>('posts-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
+    const posts = await getAllPosts()
+
+    for (let i = 0; i < posts.length; i++) {
+      const item = posts[i]
+      range.text(item?.title.toString(), (ctx) => {
+        return ctx.reply(`Do you want to read ${item.title}?`)
+      }).row()
+    }
+  }).text('Cancel', ctx => ctx.deleteMessage())
+
+  store.bot?.use(dynamicLabelledMenu).use(rangedMenu).use(postsMenu)
+  globalMenuList['greet-new'] = dynamicLabelledMenu
+  globalMenuList['ranged-menu'] = rangedMenu
+  globalMenuList['posts-menu'] = postsMenu
+  store.menus = globalMenuList
   Logger.logSuccess('All menus initialized')
 }
 
