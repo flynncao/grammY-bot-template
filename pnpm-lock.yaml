@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@grammyjs/auto-retry':
+    specifier: ^2.0.1
+    version: 2.0.1(grammy@1.19.2)
   '@grammyjs/conversations':
     specifier: ^1.2.0
     version: 1.2.0(grammy@1.19.2)
@@ -650,6 +653,18 @@ packages:
     resolution: {integrity: sha512-ut5V+D+fOoWPgGGNj83GGjnntO39xDy6DWxO0wb7Jp3DcMX0TfIqdzHF85VTQkerdyGmuuMD9AKAo5KiNlf/AQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@grammyjs/auto-retry@2.0.1(grammy@1.19.2):
+    resolution: {integrity: sha512-4W2T3KeRp1IERUUqMV6jjr+3z0FD6qe7DgXdykdqzNmOb2O+MUM7cqWCcWzbIjUVwRyFyHeH+vREO1ZvKppCrg==}
+    engines: {node: '>=12.20.0 || >=14.13.1'}
+    peerDependencies:
+      grammy: ^1.10.0
+    dependencies:
+      debug: 4.3.4(supports-color@5.5.0)
+      grammy: 1.19.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@grammyjs/conversations@1.2.0(grammy@1.19.2):
     resolution: {integrity: sha512-d06nGFPlcea4UqjOcxCm5rwiV74bZQVUWQl3YVQp5TwC0oCHNK+PXgqaKkVgkfcYSMyx3dADRBuBkcGt+yiyDA==}
@@ -1625,7 +1640,7 @@ packages:
       supports-color:
         optional: true
     dependencies:
-      ms: 2.1.2
+      ms: 2.1.3
     dev: true
 
   /debug@4.3.4(supports-color@5.5.0):
@@ -3031,7 +3046,6 @@ packages:
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-    dev: false
 
   /mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}

@@ -1,4 +1,5 @@
 import { Bot, GrammyError, HttpError, session } from 'grammy'
+import { autoRetry } from '@grammyjs/auto-retry'
 import { commandList } from './constants/index.js'
 import Logger from './utils/logger.js'
 import registerMessageHandler from './bot/message-handler.js'
@@ -10,6 +11,7 @@ import { createAllConversations } from './middlewares/conversation.js'
 import { initCrons } from './crons/index.js'
 import { connectMongodb } from './utils/mongodb.js'
 import type { MyContext } from '#root/types/bot.js'
+
 import store from '#root/databases/store.js'
 
 function setErrorHandler(bot: Bot<MyContext>) {
@@ -39,7 +41,7 @@ async function init() {
     await connectMongodb()
     const bot = new Bot<MyContext>(env.bot_token)
     store.bot = bot
-    // Set commands
+    store.bot.api.config.use(autoRetry())
     await bot.api.setMyCommands(commandList)
     // Register handlers and menus...
     registerMiddlewares()
