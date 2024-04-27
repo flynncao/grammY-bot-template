@@ -2,6 +2,12 @@
 
 A boilerplate template that applies the GrammY framework to help you get started with the Telegram bot.
 
+## Features
+
+* Structured & modularized code practice
+* TypeScript & ESLint 
+* Mongodb(Mongoose&Typegoose) support
+
 ## Startup
 
 Rename `.env.example` to `.env`, replace values of `BOT_TOKEN` and `USER_CHAT_ID`  to yours.
