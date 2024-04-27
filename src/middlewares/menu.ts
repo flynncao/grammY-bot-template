@@ -146,62 +146,63 @@ function sharedIdent(): string {
   return store.dashboardFingerprint
 }
 
-export function createAllMenus() {
-  const builder = new ClassicMenuBuilder('my-menu-identifier')
-  const obj: MenuObj = {
-    list: menuList,
-    menuOptions: {
-      onMenuOutdated: 'Reloaded',
-    },
-  }
-  const globalMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
-  for (const item of menuList) {
-    builder.reset(item.identifier, obj.menuOptions)
-    builder.insertButtons(item.buttons)
-    builder.registerInBot()
-    globalMenuList[item.identifier] = builder.getMenu()
-  }
-  // legacy creation code
-  const dynamicLabelledMenu = new Menu<MyContext>('greet-new')
-    .text(
-      ctx => `Greet ${ctx.from?.first_name ?? 'me'}!`,
-      ctx => ctx.reply(`Hello ${ctx.from.first_name}!`),
-    )
-  const rangedMenu = new Menu<MyContext>('ranged-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).url('Google', 'https://google.com').dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
-    const length = await getRandomIntFromInternet()
-
-    console.log('length :>> ', length)
-
-    for (let i = 0; i < length; i++) {
-      range.text(i.toString(), (ctx) => {
-        store.dashboardFingerprint = new Date().toISOString()
-        return ctx.reply(`You chose ${i}`, { reply_markup: store.menus['greet-new'] })
-      }).row()
+export function createAllMenus(): Promise<true> {
+  return new Promise((resolve, reject) => {
+    // TODO: control the menu creation process with builder pattern
+    const builder = new ClassicMenuBuilder('my-menu-identifier')
+    const obj: MenuObj = {
+      list: menuList,
+      menuOptions: {
+        onMenuOutdated: 'Reloaded',
+      },
     }
-  }).text('Cancel', ctx => ctx.deleteMessage())
-
-  const postsMenu = new Menu<MyContext>('posts-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
-    const posts = await getAllPosts()
-
-    for (let i = 0; i < posts.length; i++) {
-      const item = posts[i]
-      range.text(item?.title.toString(), (ctx) => {
-        return ctx.reply(`Do you want to read ${item.title}?`)
-      }).row()
+    const globalMenuList: Record<string, ProducedMenu<MyContext> | Menu<MyContext>> = {}
+    for (const item of menuList) {
+      builder.reset(item.identifier, obj.menuOptions)
+      builder.insertButtons(item.buttons)
+      builder.registerInBot()
+      globalMenuList[item.identifier] = builder.getMenu()
     }
-  }).text('Cancel', ctx => ctx.deleteMessage())
+    // legacy creation code
+    const dynamicLabelledMenu = new Menu<MyContext>('greet-new')
+      .text(
+        ctx => `Greet ${ctx.from?.first_name ?? 'me'}!`,
+        ctx => ctx.reply(`Hello ${ctx.from.first_name}!`),
+      )
+    const rangedMenu = new Menu<MyContext>('ranged-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).url('Google', 'https://google.com').dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
+      const length = await getRandomIntFromInternet()
 
-  store.bot?.use(dynamicLabelledMenu).use(rangedMenu).use(postsMenu)
-  globalMenuList['greet-new'] = dynamicLabelledMenu
-  globalMenuList['ranged-menu'] = rangedMenu
-  globalMenuList['posts-menu'] = postsMenu
-  store.menus = globalMenuList
-  Logger.logSuccess('All menus initialized')
+      for (let i = 0; i < length; i++) {
+        range.text(i.toString(), (ctx) => {
+          store.dashboardFingerprint = new Date().toISOString()
+          return ctx.reply(`You chose ${i}`, { reply_markup: store.menus['greet-new'] })
+        }).row()
+      }
+    }).text('Cancel', ctx => ctx.deleteMessage())
+
+    const postsMenu = new Menu<MyContext>('posts-menu', { autoAnswer: true, fingerprint: (ctx: MyContext) => sharedIdent() }).dynamic(async (ctx: MyContext, range: MenuRange<MyContext>) => {
+      const posts = await getAllPosts()
+
+      for (let i = 0; i < posts.length; i++) {
+        const item = posts[i]
+        range.text(item?.title.toString(), (ctx) => {
+          return ctx.reply(`Do you want to read ${item.title}?`)
+        }).row()
+      }
+    }).text('Cancel', ctx => ctx.deleteMessage())
+
+    store.bot?.use(dynamicLabelledMenu).use(rangedMenu).use(postsMenu)
+    globalMenuList['greet-new'] = dynamicLabelledMenu
+    globalMenuList['ranged-menu'] = rangedMenu
+    globalMenuList['posts-menu'] = postsMenu
+    store.menus = globalMenuList
+    Logger.logSuccess('All menus initialized')
+    resolve(true)
+  })
 }
 
 async function getRandomIntFromInternet(max: number = 5): Promise<number> {
   return new Promise((resolve, reject) => {
-    console.log('getting range')
     setTimeout(() => {
       const num = Math.floor(Math.random() * max)
       resolve(num === 0 ? 1 : num)
