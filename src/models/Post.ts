@@ -29,39 +29,6 @@ export class Post {
   public updated_at?: Date
 }
 
-// const postSchema = new Schema<IPost>({
-//   id: {
-//     type: Number,
-//     required: true,
-//   },
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   content: {
-//     type: String,
-//     required: true,
-//     default: '',
-//   },
-//   author: {
-//     type: String,
-//     required: true,
-//     default: '',
-//   },
-//   created_at: {
-//     type: Date,
-//     required: true,
-//     default: new Date(),
-//   },
-//   updated_at: {
-//     type: Date,
-//     required: false,
-//     default: null,
-//   },
-// })
-
-// const User = model<IPost>('Post', postSchema)
-
 const PostModel = getModelForClass(Post)
 
 // TODO: Use menu to operate database
