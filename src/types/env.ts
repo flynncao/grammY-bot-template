@@ -3,4 +3,5 @@ export interface MyEnv {
   user_chat_id: number | string
   unsplash_access_key?: string
   mongodb_connect_url?: string
+  proxy_address?: string
 }

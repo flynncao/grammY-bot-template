@@ -1,5 +1,6 @@
 import { Bot, GrammyError, HttpError, session } from 'grammy'
 import { autoRetry } from '@grammyjs/auto-retry'
+import { SocksProxyAgent } from 'socks-proxy-agent'
 import { commandList } from './constants/index.js'
 import Logger from './utils/logger.js'
 import registerMessageHandler from './bot/message-handler.js'
@@ -10,6 +11,7 @@ import { createAllMenus } from './middlewares/menu.js'
 import { createAllConversations } from './middlewares/conversation.js'
 import { initCrons } from './crons/index.js'
 import { connectMongodb } from './utils/mongodb.js'
+import { Post } from './models/Post'
 import type { MyContext } from '#root/types/bot.js'
 
 import store from '#root/databases/store.js'
@@ -39,7 +41,14 @@ async function init() {
     if (env === null)
       return
     await connectMongodb()
-    const bot = new Bot<MyContext>(env.bot_token)
+    const socksAgent = env.proxy_address ? new SocksProxyAgent(env.proxy_address!) : false
+    const bot = new Bot<MyContext>(env.bot_token, {
+      client: {
+        baseFetchConfig: {
+          agent: socksAgent,
+        },
+      },
+    })
     store.bot = bot
     store.bot.api.config.use(autoRetry())
     // Register handlers and menus...

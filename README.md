@@ -12,6 +12,8 @@ A boilerplate template that applies the GrammY framework to help you get started
 
 Rename `.env.example` to `.env`, replace values of `BOT_TOKEN` and `USER_CHAT_ID`  to yours.
 
+If your internet environment cannot access Telegram bot API directly, fill in the `PROXY_ADDRESS` file in `.env` to setup a proxy (only support socks protocol currently).
+
 ### How to create a Telegram chatbot yourself?
 
 Add [Bot Father](https://telegram.me/BotFather) to your contact, use `/newbot` command to create your own bot. You will get your HTTP api token as `BOT_TOKEN` eventually.
