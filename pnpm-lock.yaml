@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^3.0.2
     version: 3.0.2
   tsc-watch:
-    specifier: ^6.0.4
-    version: 6.0.4(typescript@5.2.2)
+    specifier: ^6.0.5
+    version: 6.2.1(typescript@5.2.2)
   tsup:
     specifier: ^8.0.1
     version: 8.0.1(@swc/core@1.4.0)(typescript@5.2.2)
@@ -3827,8 +3827,8 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /tsc-watch@6.0.4(typescript@5.2.2):
-    resolution: {integrity: sha512-cHvbvhjO86w2aGlaHgSCeQRl+Aqw6X6XN4sQMPZKF88GoP30O+oTuh5lRIJr5pgFWrRpF1AgXnJJ2DoFEIPHyg==}
+  /tsc-watch@6.2.1(typescript@5.2.2):
+    resolution: {integrity: sha512-GLwdz5Dy9K3sVm3RzgkLcyDpl5cvU9HEcE1A3gf5rqEwlUe7gDLxNCgcuNEw3zoKOiegMo3LnbF1t6HLqxhrSA==}
     engines: {node: '>=12.12.0'}
     hasBin: true
     peerDependencies:
