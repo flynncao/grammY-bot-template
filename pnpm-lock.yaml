@@ -15,8 +15,8 @@ dependencies:
     specifier: ^1.2.1
     version: 1.2.1(grammy@1.19.2)
   '@grammyjs/storage-mongodb':
-    specifier: ^2.4.1
-    version: 2.4.1
+    specifier: ^2.4.2
+    version: 2.5.1
   '@typegoose/typegoose':
     specifier: ^12.1.0
     version: 12.1.0(mongoose@8.1.1)
@@ -688,8 +688,8 @@ packages:
       grammy: 1.19.2
     dev: false
 
-  /@grammyjs/storage-mongodb@2.4.1:
-    resolution: {integrity: sha512-WCTLbktp+bYGbnJypjxWkMtSAvWY0TSU9caBYjLKLaKmCB2S/WQMDaOjMzL7BeDtIFJwint3f7mnKtj93bzw6Q==}
+  /@grammyjs/storage-mongodb@2.5.1:
+    resolution: {integrity: sha512-AOzQ8/CXamEkJcpJlzRNjdr0lHNGtaifZpAuiWy90whdtqZnwtxNt13rz/rvsQ8mMg2AMpJFxaS7VhaqJm08Bw==}
     dev: false
 
   /@grammyjs/types@3.3.0:
