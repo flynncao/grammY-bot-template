@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@grammyjs/auto-retry':
-    specifier: ^2.0.1
-    version: 2.0.1(grammy@1.19.2)
+    specifier: ^2.0.2
+    version: 2.0.2(grammy@1.19.2)
   '@grammyjs/conversations':
     specifier: ^1.2.0
     version: 1.2.0(grammy@1.19.2)
@@ -654,8 +654,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@grammyjs/auto-retry@2.0.1(grammy@1.19.2):
-    resolution: {integrity: sha512-4W2T3KeRp1IERUUqMV6jjr+3z0FD6qe7DgXdykdqzNmOb2O+MUM7cqWCcWzbIjUVwRyFyHeH+vREO1ZvKppCrg==}
+  /@grammyjs/auto-retry@2.0.2(grammy@1.19.2):
+    resolution: {integrity: sha512-b4A4p5jlYDiQtW0c0FXYe11WMkYoiW+5rvOaDMCOk1h7Pu2SDl7B7gmFF8cthWCx2+M2nWLOsBxAgbBG4kKWYg==}
     engines: {node: '>=12.20.0 || >=14.13.1'}
     peerDependencies:
       grammy: ^1.10.0

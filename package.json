@@ -22,7 +22,7 @@
     "build:tsc": "tsc"
   },
   "dependencies": {
-    "@grammyjs/auto-retry": "^2.0.1",
+    "@grammyjs/auto-retry": "^2.0.2",
     "@grammyjs/conversations": "^1.2.0",
     "@grammyjs/menu": "^1.2.1",
     "@grammyjs/storage-mongodb": "^2.4.1",
