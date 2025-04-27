@@ -25,7 +25,7 @@
     "@grammyjs/auto-retry": "^2.0.1",
     "@grammyjs/conversations": "^1.2.0",
     "@grammyjs/menu": "^1.2.1",
-    "@grammyjs/storage-mongodb": "^2.4.1",
+    "@grammyjs/storage-mongodb": "^2.4.2",
     "@typegoose/typegoose": "^12.1.0",
     "axios": "^1.6.2",
     "chalk": "^5.3.0",
