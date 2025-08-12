@@ -24,7 +24,7 @@
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.1",
     "@grammyjs/conversations": "^1.2.0",
-    "@grammyjs/menu": "^1.2.1",
+    "@grammyjs/menu": "^1.2.2",
     "@grammyjs/storage-mongodb": "^2.4.1",
     "@typegoose/typegoose": "^12.1.0",
     "axios": "^1.6.2",
