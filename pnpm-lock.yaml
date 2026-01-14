@@ -80,7 +80,7 @@ devDependencies:
     specifier: ^3.0.3
     version: 3.1.11
   tsc-watch:
-    specifier: ^6.0.5
+    specifier: ^6.3.1
     version: 6.3.1(typescript@5.2.2)
   tsup:
     specifier: ^8.0.2
