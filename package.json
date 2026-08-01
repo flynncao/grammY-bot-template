@@ -47,7 +47,7 @@
     "eslint": "^8.54.0",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
-    "nodemon": "^3.0.3",
+    "nodemon": "^3.1.14",
     "tsc-watch": "^6.0.5",
     "tsup": "^8.0.2",
     "typescript": "^5.2.2"
