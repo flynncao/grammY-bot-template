@@ -7,13 +7,13 @@ settings:
 dependencies:
   '@grammyjs/auto-retry':
     specifier: ^2.0.2
-    version: 2.0.2(grammy@1.19.2)
+    version: 2.0.2(grammy@1.46.0)
   '@grammyjs/conversations':
     specifier: ^1.2.0
-    version: 1.2.0(grammy@1.19.2)
+    version: 1.2.0(grammy@1.46.0)
   '@grammyjs/menu':
     specifier: ^1.2.2
-    version: 1.3.1(grammy@1.19.2)
+    version: 1.3.1(grammy@1.46.0)
   '@grammyjs/storage-mongodb':
     specifier: ^2.4.2
     version: 2.5.1
@@ -36,8 +36,8 @@ dependencies:
     specifier: ^4.6.0
     version: 4.6.0
   grammy:
-    specifier: ^1.19.2
-    version: 1.19.2
+    specifier: ^1.19.3
+    version: 1.46.0
   mongodb:
     specifier: ^6.3.0
     version: 6.3.0
@@ -642,7 +642,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       espree: 9.6.1
       globals: 13.23.0
       ignore: 5.3.0
@@ -659,46 +659,46 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@grammyjs/auto-retry@2.0.2(grammy@1.19.2):
+  /@grammyjs/auto-retry@2.0.2(grammy@1.46.0):
     resolution: {integrity: sha512-b4A4p5jlYDiQtW0c0FXYe11WMkYoiW+5rvOaDMCOk1h7Pu2SDl7B7gmFF8cthWCx2+M2nWLOsBxAgbBG4kKWYg==}
     engines: {node: '>=12.20.0 || >=14.13.1'}
     peerDependencies:
       grammy: ^1.10.0
     dependencies:
       debug: 4.3.4(supports-color@5.5.0)
-      grammy: 1.19.2
+      grammy: 1.46.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@grammyjs/conversations@1.2.0(grammy@1.19.2):
+  /@grammyjs/conversations@1.2.0(grammy@1.46.0):
     resolution: {integrity: sha512-d06nGFPlcea4UqjOcxCm5rwiV74bZQVUWQl3YVQp5TwC0oCHNK+PXgqaKkVgkfcYSMyx3dADRBuBkcGt+yiyDA==}
     engines: {node: ^12.20.0 || >=14.13.1}
     peerDependencies:
       grammy: ^1.20.1
     dependencies:
       debug: 4.3.4(supports-color@5.5.0)
-      grammy: 1.19.2
+      grammy: 1.46.0
       o-son: 1.0.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@grammyjs/menu@1.3.1(grammy@1.19.2):
+  /@grammyjs/menu@1.3.1(grammy@1.46.0):
     resolution: {integrity: sha512-HJslY/n76T1Ar5qDDhNtjLs+PpcrlB9aGsXu3CJHLt147DC3K3lpiRvRW/Xh9/x9hqYVw7KKbnvsQXVgzoU81Q==}
     engines: {node: '>=12.20.0 || >=14.13.1'}
     peerDependencies:
       grammy: ^1.31.0
     dependencies:
-      grammy: 1.19.2
+      grammy: 1.46.0
     dev: false
 
   /@grammyjs/storage-mongodb@2.5.1:
     resolution: {integrity: sha512-AOzQ8/CXamEkJcpJlzRNjdr0lHNGtaifZpAuiWy90whdtqZnwtxNt13rz/rvsQ8mMg2AMpJFxaS7VhaqJm08Bw==}
     dev: false
 
-  /@grammyjs/types@3.3.0:
-    resolution: {integrity: sha512-18Qb12jXiIptqZAlboJMvFxNxydLskUjvE5PbU8ergKQlNIr8jRvYoHDm4t/x3qEfpf+FNhGw23lyZfgEE6e/g==}
+  /@grammyjs/types@5.0.0:
+    resolution: {integrity: sha512-iq1Qrq1iPKkB8yAa0qSuIURMZOCuqTY5pWy5gHpCeL1oQ+GPadGhw/cDTVE8waJwuCzacUzuIjRv1sESvk7u7A==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:
@@ -706,7 +706,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 2.0.1
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -1305,7 +1305,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 6.11.0(typescript@5.2.2)
       '@typescript-eslint/utils': 6.11.0(eslint@8.54.0)(typescript@5.2.2)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       eslint: 8.54.0
       ts-api-utils: 1.0.3(typescript@5.2.2)
       typescript: 5.2.2
@@ -1329,7 +1329,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.11.0
       '@typescript-eslint/visitor-keys': 6.11.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.4
@@ -1805,7 +1805,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.3
-    dev: true
 
   /deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
@@ -2687,13 +2686,13 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
-  /grammy@1.19.2:
-    resolution: {integrity: sha512-bvDWesJgLn65MOsWhShVTVG1bSnh6Yo3OtUwoFzTG21CdPt6r8nzPWcuBSzxMDUQyv8I1c0TXH7zIxXFxiH4sw==}
+  /grammy@1.46.0:
+    resolution: {integrity: sha512-/8Qw+iisrUdOMk+p2mjEHouMm/BBdBEN1DHh16wiTpRUZkxDG3PxexdjCvR+wvK3LWPdrEvnQbdrwpU954sPhg==}
     engines: {node: ^12.20.0 || >=14.13.1}
     dependencies:
-      '@grammyjs/types': 3.3.0
+      '@grammyjs/types': 5.0.0
       abort-controller: 3.0.0
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       node-fetch: 2.7.0
     transitivePeerDependencies:
       - encoding
@@ -3139,7 +3138,7 @@ packages:
   /micromark@2.11.4:
     resolution: {integrity: sha512-+WoovN/ppKolQOFIAajxi7Lu9kInbPxFuTBVEavFcL8eAfVstoc5MocPmqBeAdBOJV00uaVjegzH4+MA0DN/uA==}
     dependencies:
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
       parse-entities: 2.0.0
     transitivePeerDependencies:
       - supports-color
@@ -3286,7 +3285,7 @@ packages:
     resolution: {integrity: sha512-iQMncpmEK8R8ncT8HJGsGc9Dsp8xcgYMVSbs5jgnm1lFHTZqMJTUWTDx1LBO8+mK3tPNZWFLBghQEIOULSTHZg==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
     dev: false
